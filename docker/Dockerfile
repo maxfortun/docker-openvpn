@@ -6,6 +6,8 @@ RUN apk --update add openvpn easy-rsa openresolv sipcalc bind-tools gettext
 
 COPY bin /usr/local/bin
 
+RUN rm -rf /var/cache/apk/*
+
 EXPOSE 1194/tcp
 EXPOSE 1194/udp
 
