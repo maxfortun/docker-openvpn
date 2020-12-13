@@ -22,6 +22,8 @@ done < <(docker image inspect -f '{{json .Config.ExposedPorts}}' $imageId|jq -r 
 HOST_MNT=${HOST_MNT:-$BWD/mnt}
 GUEST_MNT=${GUEST_MNT:-$BWD/mnt}
 
+DOCKER_RUN_ARGS+=( --cap-add=NET_ADMIN )
+DOCKER_RUN_ARGS+=( --cap-add=MKNOD  )
 DOCKER_RUN_ARGS+=( -v $GUEST_MNT/etc/openvpn/server:/etc/openvpn/server )
 DOCKER_RUN_ARGS+=( -v $GUEST_MNT/etc/openvpn/client:/etc/openvpn/client )
 

@@ -1,0 +1,29 @@
+client
+dev tun
+proto udp
+remote $OPENVPN_PUBLIC_IP $OPENVPN_PUBLIC_PORT
+resolv-retry infinite
+nobind
+persist-key
+persist-tun
+comp-lzo
+verb 3
+float
+mute-replay-warnings
+key-direction 1
+
+<ca>
+$OPENVPN_CA
+</ca>
+
+<cert>
+$OPENVPN_CERT
+</cert>
+
+<key>
+$OPENVPN_KEY
+</key>
+
+<tls-auth>
+$OPENVPN_TLS_AUTH
+</tls-auth>
