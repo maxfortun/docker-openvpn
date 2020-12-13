@@ -1,14 +1,20 @@
 #!/bin/sh
 
 SWD=$(dirname $0)
-pushd $SWD
+cd $SWD
 
-# Import our environment variables from systemd
-while read e; do
-	export "$e"
-done < <(tr "\000" "\n" < /proc/1/environ)
+tr "\0" "\n" < /proc/1/environ | sed 's/ /\\ /g' > /tmp/env
+set -a
+. /tmp/env
+set +a
 
 for subnet in $OPENVPN_PRIVATE_SUBNETS; do
-	read network netmask < <(sipcalc $subnet|egrep "Network address\s*-|Network mask\s*-"|cut -d- -f2- |xargs)
-	echo push \"route $network $netmask\" >> server.conf
+	sipcalc $subnet|egrep "Network address\s*-|Network mask\s*-"|cut -d- -f2- |xargs >> /tmp/net
 done
+
+[ ! -f /tmp/net ] && exit
+
+while read network netmask; do
+	echo push \"route $network $netmask\" >> /etc/openvpn/server/server.conf
+done < /tmp/net
+

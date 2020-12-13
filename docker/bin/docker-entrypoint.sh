@@ -10,6 +10,4 @@ $SWD/mkovpn.sh -in
 [ ! -c /dev/net/tun ] && mknod /dev/net/tun c 10 200
 
 cd /etc/openvpn/server
-
 openvpn --config server.conf
-

@@ -1,5 +1,7 @@
 #!/bin/sh
 name=client$1
+[ -f /etc/openvpn/client/${name}.ovpn ] && exit
+
 SWD=$(dirname $0)
 
 cd $SWD
@@ -15,4 +17,4 @@ export OPENVPN_CERT=$(cat ${name}.crt)
 export OPENVPN_KEY=$(cat ${name}.key)
 export OPENVPN_TLS_AUTH=$(cat ta.key)
 
-cat client.ovpn.envsubst | envsubst > ${name}.ovpn
+cat client.ovpn.envsubst | envsubst > /etc/openvpn/client/${name}.ovpn
