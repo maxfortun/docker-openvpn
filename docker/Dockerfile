@@ -9,3 +9,4 @@ COPY bin /usr/local/bin
 EXPOSE 1194/tcp
 EXPOSE 1194/udp
 
+CMD [ "/usr/local/bin/docker-entrypoint.sh" ]
