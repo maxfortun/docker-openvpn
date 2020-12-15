@@ -9,5 +9,7 @@ $SWD/mkovpn.sh -in
 [ ! -d /dev/net ] && mkdir -p /dev/net
 [ ! -c /dev/net/tun ] && mknod /dev/net/tun c 10 200
 
+$SWD/configure_routing.sh
+
 cd /etc/openvpn/server
 openvpn --config server.conf

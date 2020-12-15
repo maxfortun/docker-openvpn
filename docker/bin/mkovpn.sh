@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/sh -ex
+
 name=client$1
 [ -f /etc/openvpn/client/${name}.ovpn ] && exit
 

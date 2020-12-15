@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -ex
 
 SWD=$(dirname $0)
 
@@ -16,13 +16,13 @@ env | sort | xargs -L 1 echo $(date '+%Y-%m-%d %H:%M:%S') $address
 case $action in
 	add|update)
 		echo "$(date '+%Y-%m-%d %H:%M:%S') $address ip route del $address/32"
-				$SWD/unpriv-ip route del $address/32
+				$SWD/unpriv-ip.sh route del $address/32
 		echo "$(date '+%Y-%m-%d %H:%M:%S') $address ip route add $address/32 dev $dev"
-				$SWD/unpriv-ip route add $address/32 dev $dev
+				$SWD/unpriv-ip.sh route add $address/32 dev $dev
 	;;
 	delete)
 		echo "$(date '+%Y-%m-%d %H:%M:%S') $address ip route del $address/32"
-				$SWD/unpriv-ip route del $address/32
+				$SWD/unpriv-ip.sh route del $address/32
 	;;
 	*)
 	;;

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -ex
 
 if [ $(/bin/id -u) != "0" ]; then
 	SUDO=/bin/sudo
