@@ -1,6 +1,7 @@
-FROM alpine:edge
+FROM alpine:latest
+#FROM alpine:edge
   
-RUN echo https://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories
+#RUN echo https://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories
 
 RUN apk --update add openvpn easy-rsa openresolv sipcalc bind-tools gettext
 
