@@ -10,6 +10,8 @@ done
 [ ! -f /tmp/net ] && exit
 
 while read network netmask; do
-	echo push \"route $network $netmask\" >> /etc/openvpn/server/server.conf
+	line="push \"route $network $netmask\""
+	grep -q "$line" /etc/openvpn/server/server.conf && continue
+	echo "$line" >> /etc/openvpn/server/server.conf
 done < /tmp/net
 

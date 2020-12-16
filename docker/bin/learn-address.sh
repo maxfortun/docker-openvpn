@@ -11,18 +11,18 @@ if [ -z "$address" ]; then
 fi
 
 echo $(date '+%Y-%m-%d %H:%M:%S') $*
-env | sort | xargs -L 1 echo $(date '+%Y-%m-%d %H:%M:%S') $address
+env | sort | while read line; do echo $(date '+%Y-%m-%d %H:%M:%S') $address $line; done
  
 case $action in
 	add|update)
 		echo "$(date '+%Y-%m-%d %H:%M:%S') $address ip route del $address/32"
-				$SWD/unpriv-ip.sh route del $address/32
+		ip route del $address/32 || true
 		echo "$(date '+%Y-%m-%d %H:%M:%S') $address ip route add $address/32 dev $dev"
-				$SWD/unpriv-ip.sh route add $address/32 dev $dev
+		ip route add $address/32 dev $dev
 	;;
 	delete)
 		echo "$(date '+%Y-%m-%d %H:%M:%S') $address ip route del $address/32"
-				$SWD/unpriv-ip.sh route del $address/32
+		ip route del $address/32
 	;;
 	*)
 	;;
